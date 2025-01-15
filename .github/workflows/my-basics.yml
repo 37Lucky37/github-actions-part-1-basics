@@ -38,6 +38,9 @@ jobs:
   my_deploy:
     runs-on: ubuntu-latest
     needs: [my_testing]
+    env:
+      VAR1 : "Deploy variable 1"
+      VAR2 : "Deploy variable 2"
 
     steps:
     - name: Print Hello Message Deploy
@@ -51,4 +54,12 @@ jobs:
 
     - name: Test some packages if they are there 2
       run : zip
+
+    - name: Print varables
+      run : |
+        echo "Var1 = ${{ env.VAR1 }}"
+        echo "Var2 = ${{ env.VAR2 }}"
+        echo "Var3 = $LOCAL_VAR"
+      env :
+        LOCAL_VAR : "Step local variable"
       
